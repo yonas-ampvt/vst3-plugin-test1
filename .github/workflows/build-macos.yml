@@ -26,6 +26,9 @@ jobs:
     - name: Build plugin
       run: cmake --build build --config Release
 
+    - name: List all build files
+      run: find build -type f -print
+
     - name: Upload built VST3 plugin
       uses: actions/upload-artifact@v4
       with:
