@@ -30,4 +30,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: VST3-Plugin
-        path: build/*.vst3
+        path: build/VSTPlugin_artefacts/Release/VST3/*.vst3
