@@ -1,0 +1,33 @@
+name: Build macOS VST3 Plugin
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install CMake
+      run: brew install cmake
+
+    - name: Fetch JUCE
+      run: git clone --depth 1 https://github.com/juce-framework/JUCE.git
+
+    - name: Configure project
+      run: cmake -B build -S . -DJUCE_DIR=./JUCE
+
+    - name: Build plugin
+      run: cmake --build build --config Release
+
+    - name: Upload built VST3 plugin
+      uses: actions/upload-artifact@v3
+      with:
+        name: VST3-Plugin
+        path: build/*.vst3
